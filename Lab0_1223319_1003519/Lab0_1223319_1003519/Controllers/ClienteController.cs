@@ -55,6 +55,22 @@ namespace Lab0_1223319_1003519.Controllers
                 return View();
             }
         }
+        Helpers.MetododeOrdenamiento obj= new MetododeOrdenamiento(); 
+        public ActionResult ordenarN(FormCollection collection)
+        {
+
+                obj.OrdenarNombre(Storage.Instance.clienteList);
+                return RedirectToAction("Index");
+
+        }
+        public ActionResult ordenarA(FormCollection collection)
+        {
+
+            obj.OrdenarNombre(Storage.Instance.clienteList);
+            return RedirectToAction("Index");
+
+        }
+
 
         // GET: Cliente/Edit/5
         public ActionResult Edit(int id)
