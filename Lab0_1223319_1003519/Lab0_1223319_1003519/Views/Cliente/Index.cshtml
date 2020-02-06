@@ -9,6 +9,8 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+<input type="button" value="Ordenar por nombre" onclick="location.href='@Url.Action("OrdenarNombre", "Cliente")'" />
+<input type="button" value="Ordenar por apellido" onclick="location.href='@Url.Action("OrdenarApellido", "Cliente")'" />
 <table class="table">
     <tr>
         <th>

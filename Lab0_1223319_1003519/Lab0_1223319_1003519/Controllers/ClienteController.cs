@@ -43,6 +43,7 @@ namespace Lab0_1223319_1003519.Controllers
                 };
                 if (cliente.Save())
                 {
+                    //return Ordenar(true);
                     return RedirectToAction("Index");
                 }
                 else
@@ -98,6 +99,40 @@ namespace Lab0_1223319_1003519.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult OrdenarNombre()
+        {
+            for (int i = 1; i < Storage.Instance.clienteList.Count; i++)
+            {
+                for (int j = 0; j < Storage.Instance.clienteList.Count - i; j++)
+                {
+                    if (Storage.Instance.clienteList[j].Nombre.ToLower().CompareTo(Storage.Instance.clienteList[j + 1].Nombre.ToLower()) > 0)
+                    {
+                        Cliente aux = Storage.Instance.clienteList[j];
+                        Storage.Instance.clienteList[j] = Storage.Instance.clienteList[j + 1];
+                        Storage.Instance.clienteList[j + 1] = aux;
+                    }
+                }
+            }
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult OrdenarApellido()
+        {
+            for (int i = 1; i < Storage.Instance.clienteList.Count; i++)
+            {
+                for (int j = 0; j < Storage.Instance.clienteList.Count - i; j++)
+                {
+                    if (Storage.Instance.clienteList[j].Apellido.ToLower().CompareTo(Storage.Instance.clienteList[j + 1].Apellido.ToLower()) > 0)
+                    {
+                        Cliente aux = Storage.Instance.clienteList[j];
+                        Storage.Instance.clienteList[j] = Storage.Instance.clienteList[j + 1];
+                        Storage.Instance.clienteList[j + 1] = aux;
+                    }
+                }
+            }
+            return RedirectToAction("Index");
         }
     }
 }
