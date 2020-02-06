@@ -43,7 +43,6 @@ namespace Lab0_1223319_1003519.Controllers
                 };
                 if (cliente.Save())
                 {
-                    //return Ordenar(true);
                     return RedirectToAction("Index");
                 }
                 else
@@ -56,22 +55,6 @@ namespace Lab0_1223319_1003519.Controllers
                 return View();
             }
         }
-        Helpers.MetododeOrdenamiento obj= new MetododeOrdenamiento(); 
-        public ActionResult ordenarN(FormCollection collection)
-        {
-
-                obj.OrdenarNombre(Storage.Instance.clienteList);
-                return RedirectToAction("Index");
-
-        }
-        public ActionResult ordenarA(FormCollection collection)
-        {
-
-            obj.OrdenarNombre(Storage.Instance.clienteList);
-            return RedirectToAction("Index");
-
-        }
-
 
         // GET: Cliente/Edit/5
         public ActionResult Edit(int id)
@@ -119,15 +102,18 @@ namespace Lab0_1223319_1003519.Controllers
 
         public ActionResult OrdenarNombre()
         {
-            for (int i = 1; i < Storage.Instance.clienteList.Count; i++)
+            bool swap = true;
+            while (swap)
             {
-                for (int j = 0; j < Storage.Instance.clienteList.Count - i; j++)
+                swap = false;
+                for (int i = 0; i < Storage.Instance.clienteList.Count - 1; i++)
                 {
-                    if (Storage.Instance.clienteList[j].Nombre.ToLower().CompareTo(Storage.Instance.clienteList[j + 1].Nombre.ToLower()) > 0)
+                    if (Storage.Instance.clienteList[i].Nombre.ToLower().CompareTo(Storage.Instance.clienteList[i + 1].Nombre.ToLower()) > 0)
                     {
-                        Cliente aux = Storage.Instance.clienteList[j];
-                        Storage.Instance.clienteList[j] = Storage.Instance.clienteList[j + 1];
-                        Storage.Instance.clienteList[j + 1] = aux;
+                        Cliente aux = Storage.Instance.clienteList[i];
+                        Storage.Instance.clienteList[i] = Storage.Instance.clienteList[i + 1];
+                        Storage.Instance.clienteList[i + 1] = aux;
+                        swap = true;
                     }
                 }
             }
@@ -136,15 +122,18 @@ namespace Lab0_1223319_1003519.Controllers
 
         public ActionResult OrdenarApellido()
         {
-            for (int i = 1; i < Storage.Instance.clienteList.Count; i++)
+            bool swap = true;
+            while (swap)
             {
-                for (int j = 0; j < Storage.Instance.clienteList.Count - i; j++)
+                swap = false;
+                for (int i = 0; i < Storage.Instance.clienteList.Count - 1; i++)
                 {
-                    if (Storage.Instance.clienteList[j].Apellido.ToLower().CompareTo(Storage.Instance.clienteList[j + 1].Apellido.ToLower()) > 0)
+                    if (Storage.Instance.clienteList[i].Apellido.ToLower().CompareTo(Storage.Instance.clienteList[i + 1].Apellido.ToLower()) > 0)
                     {
-                        Cliente aux = Storage.Instance.clienteList[j];
-                        Storage.Instance.clienteList[j] = Storage.Instance.clienteList[j + 1];
-                        Storage.Instance.clienteList[j + 1] = aux;
+                        Cliente aux = Storage.Instance.clienteList[i];
+                        Storage.Instance.clienteList[i] = Storage.Instance.clienteList[i + 1];
+                        Storage.Instance.clienteList[i + 1] = aux;
+                        swap = true;
                     }
                 }
             }
